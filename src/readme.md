@@ -14,7 +14,7 @@
 
 <description>
 
-> ***快速部署ip打包下载OSS文件应用到阿里云函数计算***
+> ***快速部署zip打包下载OSS文件应用到阿里云函数计算***
 
 </description>
 
