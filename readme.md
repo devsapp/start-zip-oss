@@ -97,7 +97,7 @@ curl -v -L -o /tmp/my.zip -d @./event.json https://zip-oss-func-zip-oss-xxxx.cn-
 |#|文件数|压缩前总大小|压缩后总大小|执行时间|
 |---|---|---|---|---|
 |1|7|1.2MB|1.16MB|0.4s|
-|2|57|1.06GB|1.06GB|63s|
+|2|57|1.06GB|0.91GB|63s|
 
 通过 Serverless Devs 开发者工具，您只需要几步，就可以体验 Serverless 架构，带来的降本提效的技术红利。
 
