@@ -85,7 +85,7 @@ def zip_files(oss_client, source_dir, source_files, dest_file):
         if key[-1] == '/':
             return
         obj = oss_client.get_object(key)
-        zip_file.write_file(key[len(source_dir):], obj,
+        zip_file.write_file(key.replace(source_dir, '', 1), obj,
                             compress_type=zipfile.ZIP_STORED)
 
     def producer(queue):
