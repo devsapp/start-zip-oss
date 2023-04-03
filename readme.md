@@ -1,5 +1,7 @@
-# start-zip-oss 帮助文档
 
+> 注：当前项目为 Serverless Devs 应用，由于应用中会存在需要初始化才可运行的变量（例如应用部署地区、服务名、函数名等等），所以**不推荐**直接 Clone 本仓库到本地进行部署或直接复制 s.yaml 使用，**强烈推荐**通过 `s init ` 的方法或应用中心进行初始化，详情可参考[部署 & 体验](#部署--体验) 。
+
+# start-zip-oss 帮助文档
 <p align="center" class="flex justify-center">
     <a href="https://www.serverless-devs.com" class="ml-1">
     <img src="http://editor.devsapp.cn/icon?package=start-zip-oss&type=packageType">
@@ -14,41 +16,94 @@
 
 <description>
 
-> ***快速部署zip打包下载OSS文件应用到阿里云函数计算***
+使用函数计算zip打包下载OSS文件
 
 </description>
 
-<table>
-</table>
+<codeUrl>
 
-<codepre id="codepre">
+- [:smiley_cat: 代码](https://github.com/devsapp/start-zip-oss)
 
-</codepre>
+</codeUrl>
+<preview>
 
-<deploy>
+
+
+</preview>
+
+
+## 前期准备
+
+使用该项目，您需要有开通以下服务：
+
+<service>
+
+
+
+| 服务 |  备注  |
+| --- |  --- |
+| 函数计算 FC |  需要创建函数处理核心业务逻辑 |
+| 对象存储 OSS |  需要拉取存储OSS文件 |
+
+</service>
+
+推荐您拥有以下的产品权限 / 策略：
+<auth>
+
+
+
+| 服务/业务 |  权限 |  备注  |
+| --- |  --- |   --- |
+| 函数计算 | AliyunFCFullAccess |  需要创建函数处理核心业务逻辑 |
+| 对象存储 OSS | AliyunOSSFullAccess |  需要拉取存储OSS文件 |
+
+</auth>
+
+<remark>
+
+您还需要注意：   
+OSS创建的bucket 和 应用函数需在同一个 region
+
+</remark>
+
+<disclaimers>
+
+免责声明：   
+本项目打包使用标准的 python zipfile lib 处理，因需要打包的文件大小、数量不同函数执行时间不同，需根据情况具体测试打包时间以及所产生的费用。
+
+</disclaimers>
 
 ## 部署 & 体验
 
 <appcenter>
-
+   
 - :fire: 通过 [Serverless 应用中心](https://fcnext.console.aliyun.com/applications/create?template=start-zip-oss) ，
-[![Deploy with Severless Devs](https://img.alicdn.com/imgextra/i1/O1CN01w5RFbX1v45s8TIXPz_!!6000000006118-55-tps-95-28.svg)](https://fcnext.console.aliyun.com/applications/create?template=start-zip-oss)  该应用。 
-
+  [![Deploy with Severless Devs](https://img.alicdn.com/imgextra/i1/O1CN01w5RFbX1v45s8TIXPz_!!6000000006118-55-tps-95-28.svg)](https://fcnext.console.aliyun.com/applications/create?template=start-zip-oss) 该应用。
+   
 </appcenter>
-
+<deploy>
+    
 - 通过 [Serverless Devs Cli](https://www.serverless-devs.com/serverless-devs/install) 进行部署：
-    - [安装 Serverless Devs Cli 开发者工具](https://www.serverless-devs.com/serverless-devs/install) ，并进行[授权信息配置](https://www.serverless-devs.com/fc/config) ；
-    - 初始化项目：`s init start-zip-oss -d start-zip-oss`   
-    - 进入项目，并进行项目部署：`cd start-zip-oss && s deploy -y`
-
+  - [安装 Serverless Devs Cli 开发者工具](https://www.serverless-devs.com/serverless-devs/install) ，并进行[授权信息配置](https://docs.serverless-devs.com/fc/config) ；
+  - 初始化项目：`s init start-zip-oss -d start-zip-oss `
+  - 进入项目，并进行项目部署：`cd start-zip-oss && s deploy - y`
+   
 </deploy>
+
+## 应用详情
 
 <appdetail id="flushContent">
 
 # 应用详情
 ### 需求
 
-打包下载 OSS 上存储的多个文件，例如将OSS上的一个目录打包下载。这样可以节省网络传输的数据，达到减少费用和下载时间的效果。
+打包下载 OSS 上存储的多个文件，例如将OSS上的一个目录打包下载。这样可以节省网络传输的数据，达到减少费用和下载时间的效果。ss Devs 开发者工具，您只需要几步，就可以体验 Serverless 架构，带来的降本提效的技术红利。
+
+</appdetail>
+
+## 使用文档
+
+<usedetail id="flushContent">
 
 ### 调用函数
 应用部署成功后， 会输出 HTTP trigger 对应的公网访问地址
@@ -101,21 +156,20 @@ curl -v -L -o /tmp/my.zip -d @./event.json https://zip-oss-func-zip-oss-xxxx.cn-
 
 通过 Serverless Devs 开发者工具，您只需要几步，就可以体验 Serverless 架构，带来的降本提效的技术红利。
 
+</usedetail>
 
-</appdetail>
 
 <devgroup>
+
 
 ## 开发者社区
 
 您如果有关于错误的反馈或者未来的期待，您可以在 [Serverless Devs repo Issues](https://github.com/serverless-devs/serverless-devs/issues) 中进行反馈和交流。如果您想要加入我们的讨论组或者了解 FC 组件的最新动态，您可以通过以下渠道进行：
 
-<p align="center">
+<p align="center">  
 
 | <img src="https://serverless-article-picture.oss-cn-hangzhou.aliyuncs.com/1635407298906_20211028074819117230.png" width="130px" > | <img src="https://serverless-article-picture.oss-cn-hangzhou.aliyuncs.com/1635407044136_20211028074404326599.png" width="130px" > | <img src="https://serverless-article-picture.oss-cn-hangzhou.aliyuncs.com/1635407252200_20211028074732517533.png" width="130px" > |
-|--- | --- | --- |
-| <center>微信公众号：\`serverless\`</center> | <center>微信小助手：\`xiaojiangwh\`</center> | <center>钉钉交流群：\`33947367\`</center> | 
-
+| --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| <center>微信公众号：`serverless`</center>                                                                                         | <center>微信小助手：`xiaojiangwh`</center>                                                                                        | <center>钉钉交流群：`33947367`</center>                                                                                           |
 </p>
-
 </devgroup>
