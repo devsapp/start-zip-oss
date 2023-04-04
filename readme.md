@@ -4,13 +4,13 @@
 # start-zip-oss 帮助文档
 <p align="center" class="flex justify-center">
     <a href="https://www.serverless-devs.com" class="ml-1">
-    <img src="http://editor.devsapp.cn/icon?package=start-zip-oss&type=packageType">
+    <img src="http://editor.devsapp.cn/icon?package=start-zip-oss&type=packageType" />
   </a>
   <a href="http://www.devsapp.cn/details.html?name=start-zip-oss" class="ml-1">
-    <img src="http://editor.devsapp.cn/icon?package=start-zip-oss&type=packageVersion">
+    <img src="http://editor.devsapp.cn/icon?package=start-zip-oss&type=packageVersion"/>
   </a>
   <a href="http://www.devsapp.cn/details.html?name=start-zip-oss" class="ml-1">
-    <img src="http://editor.devsapp.cn/icon?package=start-zip-oss&type=packageDownload">
+    <img src="http://editor.devsapp.cn/icon?package=start-zip-oss&type=packageDownload"/>
   </a>
 </p>
 
@@ -165,7 +165,7 @@ curl -v -L -o /tmp/my.zip -d @./event.json https://zip-oss-func-zip-oss-xxxx.cn-
 
 <p align="center">  
 
-| <img src="https://serverless-article-picture.oss-cn-hangzhou.aliyuncs.com/1635407298906_20211028074819117230.png" width="130px" > | <img src="https://serverless-article-picture.oss-cn-hangzhou.aliyuncs.com/1635407044136_20211028074404326599.png" width="130px" > | <img src="https://serverless-article-picture.oss-cn-hangzhou.aliyuncs.com/1635407252200_20211028074732517533.png" width="130px" > |
+| <img src="https://serverless-article-picture.oss-cn-hangzhou.aliyuncs.com/1635407298906_20211028074819117230.png" width="130px" /> | <img src="https://serverless-article-picture.oss-cn-hangzhou.aliyuncs.com/1635407044136_20211028074404326599.png" width="130px" /> | <img src="https://serverless-article-picture.oss-cn-hangzhou.aliyuncs.com/1635407252200_20211028074732517533.png" width="130px" /> |
 | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | <center>微信公众号：`serverless`</center>                                                                                         | <center>微信小助手：`xiaojiangwh`</center>                                                                                        | <center>钉钉交流群：`33947367`</center>                                                                                           |
 </p>
