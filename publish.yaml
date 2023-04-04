@@ -1,6 +1,6 @@
 Type: Application
 Name: start-zip-oss
-Version: 0.0.7
+Version: 0.0.9
 Provider:
   - 阿里云
 Description: 使用函数计算zip打包下载OSS文件
@@ -12,7 +12,7 @@ Service:
   函数计算:
     Authorities:
       - AliyunFCFullAccess
-  对象存储 OSS:
+  对象存储:
     Authorities:
       - AliyunOSSFullAccess
 Parameters:

@@ -55,7 +55,7 @@
 | 服务/业务 |  权限 |  备注  |
 | --- |  --- |   --- |
 | 函数计算 | AliyunFCFullAccess |  需要创建函数处理核心业务逻辑 |
-| 对象存储 OSS | AliyunOSSFullAccess |  需要拉取存储OSS文件 |
+| 对象存储 | AliyunOSSFullAccess |  需要拉取存储OSS文件 |
 
 </auth>
 
@@ -94,10 +94,7 @@ OSS创建的bucket 和 应用函数需在同一个 region
 
 <appdetail id="flushContent">
 
-# 应用详情
-### 需求
-
-打包下载 OSS 上存储的多个文件，例如将OSS上的一个目录打包下载。这样可以节省网络传输的数据，达到减少费用和下载时间的效果。ss Devs 开发者工具，您只需要几步，就可以体验 Serverless 架构，带来的降本提效的技术红利。
+打包下载 OSS 上存储的多个文件，例如将OSS上的一个目录打包下载。这样可以节省网络传输的数据，达到减少费用和下载时间的效果。使用 Serverless Devs开发者工具，您只需要几步，就可以体验 Serverless 架构，带来的降本提效的技术红利。
 
 </appdetail>
 
@@ -105,7 +102,7 @@ OSS创建的bucket 和 应用函数需在同一个 region
 
 <usedetail id="flushContent">
 
-### 调用函数
+## 调用函数
 应用部署成功后， 会输出 HTTP trigger 对应的公网访问地址
 ![](https://img.alicdn.com/imgextra/i3/O1CN013J7B3G1E2Eny1yjR1_!!6000000000293-2-tps-908-144.png)
 
@@ -139,7 +136,7 @@ curl -v -L -o /tmp/my.zip -d @./event.json https://zip-oss-func-zip-oss-xxxx.cn-
 
 ![zip_oss_high](https://img.alicdn.com/tfs/TB1GitkyeL2gK0jSZPhXXahvXXa-1258-946.png)
 
-### 实现细节
+## 实现细节
 
 1. 函数运行环境的磁盘空间是有限的，采用流式下载和上传的方式，只在内存中缓存少量的数据
 2. 为了加快速度，一边生成zip文件时一边上传到OSS
@@ -147,7 +144,7 @@ curl -v -L -o /tmp/my.zip -d @./event.json https://zip-oss-func-zip-oss-xxxx.cn-
 
 ![zip_oss_low](https://img.alicdn.com/tfs/TB13jVqyoY1gK0jSZFCXXcwqXXa-774-1066.png)
 
-### 实验数据
+## 实验数据
 
 |#|文件数|压缩前总大小|压缩后总大小|执行时间|
 |---|---|---|---|---|
