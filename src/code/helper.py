@@ -2,13 +2,22 @@ import zipfile
 from zipfile import ZipInfo
 import zlib
 import time
+import binascii
+import struct
+
+try:
+    import zlib  # We may need its compression method
+    crc32 = zlib.crc32
+except ImportError:
+    zlib = None
+    crc32 = binascii.crc32
 
 
 class MemBuffer(object):
     def __init__(self, queue, block_size=8*1024*1024):
         self._count = 0
         self._part_no = 0
-        self._buffer = ''
+        self._buffer = b''
         self._queue = queue
         self._block_size = block_size
 
@@ -25,7 +34,7 @@ class MemBuffer(object):
         return len(buf)
 
     def flush(self):
-        pass
+        self.flush_buffer()
 
     def flush_buffer(self):
         if len(self._buffer) > 0:
@@ -34,7 +43,7 @@ class MemBuffer(object):
     def push_buffer(self):
         self._part_no += 1
         self._queue.put((self._part_no, self._buffer))
-        self._buffer = ''
+        self._buffer = b''
 
 
 class StreamZipFile(zipfile.ZipFile):
@@ -42,15 +51,15 @@ class StreamZipFile(zipfile.ZipFile):
         if not isinstance(zinfo_or_arcname, ZipInfo):
             zinfo = ZipInfo(filename=zinfo_or_arcname,
                             date_time=time.localtime(time.time())[:6])
-
             zinfo.compress_type = self.compression
-            if zinfo.filename[-1] == '/':
+            if zinfo.is_dir():
                 zinfo.external_attr = 0o40775 << 16   # drwxrwxr-x
                 zinfo.external_attr |= 0x10           # MS-DOS directory flag
             else:
                 zinfo.external_attr = 0o600 << 16     # ?rw-------
         else:
             zinfo = zinfo_or_arcname
+    
         zinfo.flag_bits |= 0x08  # we will write a data descriptor
 
         if not self.fp:
@@ -61,15 +70,16 @@ class StreamZipFile(zipfile.ZipFile):
             zinfo.compress_type = compress_type
         else:
             zinfo.compress_type = zipfile.ZIP_DEFLATED
-
-        zinfo.file_size = file_size = 0      # Uncompressed size
-        zinfo.header_offset = self.fp.tell()  # Start of header bytes
-
-        self._writecheck(zinfo)
-        self._didModify = True
+        
         zinfo.CRC = crc = 0
         zinfo.compress_size = compress_size = 0
+        zinfo.file_size =  file_size = 0  # Uncompressed size
+        
+        zinfo.header_offset = self.fp.tell()  # Start of header bytes
+        self._writecheck(zinfo)
+        self._didModify = True
         self.fp.write(zinfo.FileHeader())
+
         if zinfo.compress_type == zipfile.ZIP_DEFLATED:
             cmpr = zlib.compressobj(
                 zlib.Z_DEFAULT_COMPRESSION, zlib.DEFLATED, -15)
@@ -81,7 +91,7 @@ class StreamZipFile(zipfile.ZipFile):
             if not buf:
                 break
             file_size = file_size + len(buf)
-            crc = zlib.crc32(buf, crc) & 0xffffffff
+            crc = crc32(buf, crc) & 0xffffffff
             if cmpr:
                 buf = cmpr.compress(buf)
                 compress_size = compress_size + len(buf)
@@ -97,5 +107,14 @@ class StreamZipFile(zipfile.ZipFile):
 
         zinfo.CRC = crc
         zinfo.file_size = file_size
+        
+        # Write updated header info, Write CRC and file sizes after the file data
+        fmt = '<LLLL'
+        self.fp.write(struct.pack(fmt, zipfile._DD_SIGNATURE, zinfo.CRC,
+                                  zinfo.compress_size, zinfo.file_size))
+
+        # Successfully written: Add file to our caches
         self.filelist.append(zinfo)
         self.NameToInfo[zinfo.filename] = zinfo
+        
+        self.start_dir = self.fp.tell()

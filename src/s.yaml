@@ -15,7 +15,7 @@
 #   更多函数计算案例，可参考：https://github.com/devsapp/awesome/
 #   有问题快来钉钉群问一下吧：33947367
 edition: 1.0.0
-name:  Zip OSS
+name: Zip OSS
 # access 是当前应用所需要的密钥信息配置：
 # 密钥配置可以参考：https://www.serverless-devs.com/serverless-devs/command/config
 # 密钥使用顺序可以参考：https://www.serverless-devs.com/serverless-devs/tool#密钥使用顺序与规范
@@ -35,10 +35,10 @@ services:
         role: "{{ roleArn }}"
         internetAccess: true
       function:
-        name: "{{ functionName }}" 
+        name: "{{ functionName }}"
         handler: main.main_handler
         timeout: 1800
-        runtime: python2.7
+        runtime: python3.9
         codeUri: ./code
         memorySize: 3072
       triggers:
