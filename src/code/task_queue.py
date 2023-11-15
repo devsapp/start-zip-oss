@@ -23,14 +23,13 @@ class TaskQueue(object):
 
         self.__lock = threading.Lock()
         self.__exc_info = None
-        self.__exc_stack = ''
+        self.__exc_stack = ""
 
     def run(self):
         self.__add_and_run(threading.Thread(target=self.__producer_func))
 
         for c in self.__consumers:
-            self.__add_and_run(threading.Thread(
-                target=self.__consumer_func, args=(c,)))
+            self.__add_and_run(threading.Thread(target=self.__consumer_func, args=(c,)))
 
         # give KeyboardInterrupt chances to happen by joining with timeouts.
         while self.__any_active():
