@@ -1,5 +1,5 @@
 
-> 注：当前项目为 Serverless Devs 应用，由于应用中会存在需要初始化才可运行的变量（例如应用部署地区、函数名等等），所以**不推荐**直接 Clone 本仓库到本地进行部署或直接复制 s.yaml 使用，**强烈推荐**通过 `s init --project ${模版名称}` 的方法或应用中心进行初始化，详情可参考[部署 & 体验](#部署--体验) 。
+> 注：当前项目为 Serverless Devs 应用，由于应用中会存在需要初始化才可运行的变量（例如应用部署地区、函数名等等），所以**不推荐**直接 Clone 本仓库到本地进行部署或直接复制 s.yaml 使用，**强烈推荐**通过 `s init ${模版名称}` 的方法或应用中心进行初始化，详情可参考[部署 & 体验](#部署--体验) 。
 
 # start-zip-oss-v3 帮助文档
 <p align="center" class="flex justify-center">
@@ -16,7 +16,7 @@
 
 <description>
 
-使用函数计算zip打包下载OSS文件
+本案例将 OSS 内存储的文件打包下载，快速创建并部署到阿里云函数计算 FC。
 
 </description>
 
@@ -34,46 +34,19 @@
 
 ## 前期准备
 
-使用该项目，您需要有开通以下服务：
+使用该项目，您需要有开通以下服务并拥有对应权限：
 
 <service>
 
 
 
-| 服务 |  备注  |
-| --- |  --- |
-| 函数计算 FC |  需要创建函数处理核心业务逻辑 |
-| 对象存储 OSS |  需要拉取存储 OSS 文件 |
+| 服务/业务 |  权限  | 相关文档 |
+| --- |  --- | --- |
+| 函数计算 |  AliyunFCFullAccess | [帮助文档](https://help.aliyun.com/product/2508973.html) [计费文档](https://help.aliyun.com/document_detail/2512928.html) |
+| 对象存储 |  AliyunOSSFullAccess | [帮助文档](https://help.aliyun.com/zh/oss) [计费文档](https://help.aliyun.com/zh/oss/product-overview/billing) |
 
 </service>
 
-推荐您拥有以下的产品权限 / 策略：
-<auth>
-
-
-
-| 服务/业务 |  权限 |  备注  |
-| --- |  --- |   --- |
-| 函数计算 | AliyunFCFullAccess |  需要创建函数处理核心业务逻辑 |
-| 对象存储 | AliyunOSSFullAccess |  需要拉取存储 OSS 文件 |
-
-</auth>
-
-<remark>
-
-您还需要注意：   
-您还需要注意：  
-OSS 创建的 bucket 和 应用函数需在同一个 region
-
-</remark>
-
-<disclaimers>
-
-免责声明：   
-免责声明：  
-本项目打包使用标准的 python zipfile lib 处理，因需要打包的文件大小、数量不同函数执行时间不同，需根据情况具体测试打包时间以及所产生的费用。
-
-</disclaimers>
 
 ## 部署 & 体验
 
@@ -87,24 +60,31 @@ OSS 创建的 bucket 和 应用函数需在同一个 region
     
 - 通过 [Serverless Devs Cli](https://www.serverless-devs.com/serverless-devs/install) 进行部署：
   - [安装 Serverless Devs Cli 开发者工具](https://www.serverless-devs.com/serverless-devs/install) ，并进行[授权信息配置](https://docs.serverless-devs.com/fc/config) ；
-  - 初始化项目：`s init --project start-zip-oss-v3 -d start-zip-oss-v3`
+  - 初始化项目：`s init start-zip-oss-v3 -d start-zip-oss-v3`
   - 进入项目，并进行项目部署：`cd start-zip-oss-v3 && s deploy -y`
    
 </deploy>
 
-## 应用详情
+## 案例介绍
 
 <appdetail id="flushContent">
 
-打包下载 OSS 上存储的多个文件，例如将 OSS 上的一个目录打包下载。这样可以节省网络传输的数据，达到减少费用和下载时间的效果。使用 Serverless Devs 开发者工具，您只需要几步，就可以体验 Serverless 架构，带来的降本提效的技术红利。
+本案例将 OSS 内存储的文件打包下载，快速创建并部署到阿里云函数计算 FC。
+
+打包下载 OSS 上存储的多个文件，例如将 OSS 上的一个目录打包下载。这样可以节省网络传输的数据，达到减少费用和下载时间的效果。
+
+通过 Serverless 开发平台，您只需要几步，就可以体验快速将OSS内的文件打包下载，并享受 Serverless 架构带来的降本提效的技术红利。
+
+您还需要注意：  
+OSS 创建的 bucket 和 应用函数需在同一个 region
 
 </appdetail>
 
-## 使用文档
+## 使用流程
 
 <usedetail id="flushContent">
 
-## 调用函数
+#### 调用函数
 
 应用部署成功后， 会输出 HTTP trigger 对应的公网访问地址
 ![](https://img.alicdn.com/imgextra/i3/O1CN013J7B3G1E2Eny1yjR1_!!6000000000293-2-tps-908-144.png)
@@ -136,13 +116,13 @@ curl -v -L -o /tmp/my.zip -d @./event.json https://zip-oss-func-zip-oss-xxxx.cn-
 > - [java sdk](https://github.com/aliyun/fc-java-sdk/blob/bef94ddecad395503bb49476e3886a86e7dd9bcf/src/test/java/com/aliyuncs/fc/FunctionComputeClientTest.java#L2165)
 > - [nodejs sdk](https://github.com/aliyun/fc-nodejs-sdk/blob/master/lib/client.js#L103)
 
-### 方案
+#### 方案
 
 使用函数计算先把多个文件压缩成一个 zip，存储到 OSS 上面，返回 zip 文件的地址，客户端下载此文件。一般的客户端都支持跟随 HTTP 302 跳转地址，所以在完成压缩后，返回一个 302 的地址，客户端再跟随这个地址下载压缩后的文件包。
 
 ![zip_oss_high](https://img.alicdn.com/tfs/TB1GitkyeL2gK0jSZPhXXahvXXa-1258-946.png)
 
-## 实现细节
+#### 实现细节
 
 1. 函数运行环境的磁盘空间是有限的，采用流式下载和上传的方式，只在内存中缓存少量的数据
 2. 为了加快速度，一边生成 zip 文件时一边上传到 OSS
@@ -150,16 +130,19 @@ curl -v -L -o /tmp/my.zip -d @./event.json https://zip-oss-func-zip-oss-xxxx.cn-
 
 ![zip_oss_low](https://img.alicdn.com/tfs/TB13jVqyoY1gK0jSZFCXXcwqXXa-774-1066.png)
 
-## 实验数据
+#### 实验数据
 
 | #   | 文件数 | 压缩前总大小 | 压缩后总大小 | 执行时间 |
 | --- | ------ | ------------ | ------------ | -------- |
 | 1   | 7      | 1.2MB        | 1.16MB       | 0.4s     |
 | 2   | 57     | 1.06GB       | 0.91GB       | 63s      |
 
-通过 Serverless Devs 开发者工具，您只需要几步，就可以体验 Serverless 架构，带来的降本提效的技术红利。
-
 </usedetail>
+
+## 注意事项
+
+<matters id="flushContent">
+</matters>
 
 
 <devgroup>
