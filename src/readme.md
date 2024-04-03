@@ -47,6 +47,17 @@
 
 </service>
 
+<remark>
+
+
+
+</remark>
+
+<disclaimers>
+
+
+
+</disclaimers>
 
 ## 部署 & 体验
 
@@ -110,11 +121,8 @@ curl -v -L -o /tmp/my.zip -d @./event.json https://zip-oss-func-zip-oss-xxxx.cn-
 
 打开`/tmp/my.zip`，就是`files/`目录下所有文件的压缩包。
 
-> **注意**, 如果您有需求将上面的示例中的匿名非鉴权的 HTTP 函数改成需要鉴权的 HTTP 函数，可以采用相关的 sdk 去调用
+> **注意**, 如果您有需求将上面的示例中的匿名非鉴权的 HTTP 函数改成需要鉴权的 HTTP 函数，请查看 [HTTP触发器配置签名认证](https://help.aliyun.com/document_detail/2665963.html?spm=a2c4g.2539903.0.i7#0c9ec7a734i6n )
 >
-> - [python sdk](https://github.com/aliyun/fc-python-sdk/blob/master/fc2/client.py#L125)
-> - [java sdk](https://github.com/aliyun/fc-java-sdk/blob/bef94ddecad395503bb49476e3886a86e7dd9bcf/src/test/java/com/aliyuncs/fc/FunctionComputeClientTest.java#L2165)
-> - [nodejs sdk](https://github.com/aliyun/fc-nodejs-sdk/blob/master/lib/client.js#L103)
 
 #### 方案
 
