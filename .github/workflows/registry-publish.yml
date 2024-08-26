@@ -1,8 +1,9 @@
 name: publish package to registry
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - dipper
 
 jobs:
   deploy:
