@@ -2,11 +2,15 @@ edition: 3.0.0
 name: Zip OSS
 access: '{{ access }}'
 
+
+vars:
+  region: "{{ region }}"
+
 resources:
   fc-zip-oss-service:
     component: fc3
     props:
-      region: '{{ region }}'
+      region: ${vars.region}
       handler: main.main_handler
       timeout: 1800
       runtime: python3.9
