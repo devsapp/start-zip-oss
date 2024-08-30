@@ -19,6 +19,7 @@ resources:
       internetAccess: true
       functionName: '{{ functionName }}'
       code: ./code
+      logConfig: auto
       triggers:
         - triggerName: http-test
           triggerType: http
