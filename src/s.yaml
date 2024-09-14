@@ -14,7 +14,9 @@ resources:
       handler: main.main_handler
       timeout: 1800
       runtime: python3.9
+      cpu: 1
       memorySize: 3072
+      diskSize: 512
       role: '{{ roleArn }}'
       internetAccess: true
       functionName: '{{ functionName }}'
