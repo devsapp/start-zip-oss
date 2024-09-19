@@ -1,10 +1,10 @@
 Edition: 3.0.0
 Type: Project
 Name: start-zip-oss-cap
-Version: 0.0.1
+Version: 0.0.2
 Provider:
   - 阿里云
-Description: 本案例将 OSS 内存储的文件打包下载，快速创建并部署到阿里云函数计算 FC。
+Description: 本案例展示了如何将 OSS 内存储的文件打包下载，快速创建并部署到云原生应用开发平台。打包下载OSS上存储的多个文件，可以节省网络传输的数据，减少费用和下载时间。
 HomePage: https://github.com/devsapp/start-zip-oss/tree/dipper
 Organization: 阿里云函数计算（FC）
 Effective: Public
