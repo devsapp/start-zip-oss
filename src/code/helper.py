@@ -109,7 +109,8 @@ class StreamZipFile(zipfile.ZipFile):
         zinfo.file_size = file_size
         
         # Write updated header info, Write CRC and file sizes after the file data
-        fmt = '<LLLL'
+        # <QQQQ corresponds to C language's unsigned long long, supporting a single file > 4GB.
+        fmt = '<QQQQ'
         self.fp.write(struct.pack(fmt, zipfile._DD_SIGNATURE, zinfo.CRC,
                                   zinfo.compress_size, zinfo.file_size))
 
