@@ -1,7 +1,7 @@
 Edition: 3.0.0
 Type: Project
 Name: start-zip-oss-v3
-Version: 0.0.3
+Version: 0.0.4
 Provider:
   - 阿里云
 Description: 本案例将 OSS 内存储的文件打包下载，快速创建并部署到阿里云函数计算 FC。
